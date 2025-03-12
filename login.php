@@ -44,7 +44,7 @@ echo <<<EOD
 </form>
 EOD;
 
-
 close_html ();
+
 
 ?>
