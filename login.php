@@ -19,7 +19,7 @@ EOD;
 
 
 echo <<<EOD
-<form method="POST">
+<form method="POST"  action="register_check.php">
 <h2>Register</h2>
 
 <p><label for="name-register">Nombre y apellido:</label>

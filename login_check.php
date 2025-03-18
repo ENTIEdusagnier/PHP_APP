@@ -1,7 +1,7 @@
 <?php
 
 if (!isset($_POST["username"]) || !isset($_POST["password"])){
-    "Error 1: Formulario no enviado";
+    echo "Error 1: Formulario no enviado";
     exit();
 }
 

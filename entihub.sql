@@ -22,7 +22,7 @@ CREATE TABLE users (
 
 INSERT INTO users (`name`, username, email, birthday, `password`)
 VALUES 
-('Edu', 'edusagnier', 'eduard.sagnier@enti.cat' , '2004/12/20', md5('A123456789a!'));
+('Edu', 'edusagnier', 'eduard.sagnier@enti.cat' , '2004-12-20', md5('A123456789a!'));
 
 /* Creación de tabla de Items */
 CREATE TABLE messages (
@@ -35,3 +35,7 @@ CREATE TABLE messages (
     FOREIGN KEY (id_user) REFERENCES users(id_user)
 );
 
+
+CREATE USER 'admin'@'localhost' IDENTIFIED BY 'enti';
+GRANT ALL PRIVILEGES ON entihub.* TO 'admin'@'localhost';
+FLUSH PRIVILEGES;
