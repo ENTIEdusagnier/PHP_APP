@@ -5,7 +5,7 @@ if (!isset($_POST["username"]) || !isset($_POST["password"]) || !isset($_POST["p
     exit();
 }
 
-#Username Checks
+//Username Checks
 
 $username = trim($_POST["username"]);
 
@@ -24,22 +24,13 @@ if (strlen($username) > 16){
 
 $username_tmp = addslashes($username);
 
-if ($username_tmp != $username){
+if ($username_tmp !== $username){
     echo "Error 2c: Nombre con caracteres no váldos";
     exit();
 }
 
-$conn = mysqli_connect("localhost", "admin", "enti", "entihub");
+$username = $username_tmp;
 
-$query = <<<EOD
-SELECT id_user FROM users
-WHERE username='{$username}'
-EOD;
-$resultado = mysqli_query($conn, $query);
-if (mysqli_num_rows($resultado) != 0){
-    echo "Error 2d: Usuario existente";
-    exit();
-}
 
 # Check name
 
@@ -72,10 +63,9 @@ if ($name_tmp != $name){
 $password = trim($_POST["password"]);
 $password_check = trim($_POST["password-check"]);
 
-if($password != $password_check){
-    echo "Error 4a: Password no concuerdan";
+if ($password_check !== $password){
+    echo "Error 3c: Password con caracteres no váldos";
     exit();
-
 }
 
 if (strlen($password) < 4){
@@ -93,10 +83,13 @@ if (strlen($password) > 26){
 
 $password_tmp = addslashes($password);
 
-if ($password_tmp != $password){
+if ($password_tmp !== $password){
     echo "Error 4d: Password con caracteres no váldos";
     exit();
 }
+
+$password = $password_tmp;
+
 
 #Password Check Checks
 
@@ -121,7 +114,15 @@ if ($password_check_tmp != $password_check){
 }
 
 
-$password = md5($password);
+$password_check = $password_check_tmp;
+
+if($password != $password_check){
+    echo "Error 4a: Password no concuerdan";
+    exit();
+
+}
+
+
 
 // Remove all illegal characters from email https://www.w3schools.com/Php/filter_validate_email.asp 
 
@@ -132,7 +133,7 @@ if (strlen($email) > 24){
     exit();
 }
 
-$email = filter_var($email, FILTER_SANITIZE_EMAIL);
+$email = addslashes(filter_var($email, FILTER_SANITIZE_EMAIL));
 
 // Validate e-mail
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -141,16 +142,6 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 }
 
 
-$query2 = <<<EOD
-SELECT id_user FROM users
-WHERE email='{$email}'
-EOD;
-$resultado2 = mysqli_query($conn, $query2);
-
-if (mysqli_num_rows($resultado2) != 0){
-    echo "Error 4c: Email existente";
-    exit();
-}
 
 
 $date = ($_POST["date"]);
@@ -158,7 +149,7 @@ $date = ($_POST["date"]);
 list($any, $mes, $dia) = explode("-", $date);
 
 // Convertim a enters
-$any = (int) $any;
+$any = intval($any);
 $mes = (int) $mes;
 $dia = (int) $dia;
 
@@ -168,18 +159,48 @@ if (!checkdate($mes, $dia, $any)) {
     exit();
 }
 
+require_once("db_conf.php");
+$conn = mysqli_connect($db_server, $db_user, $db_pass, $db_db);
+
+$query = <<<EOD
+SELECT id_user
+FROM users
+WHERE username='{$username}'
+EOD;
+$resultado = mysqli_query($conn, $query);
+if (mysqli_num_rows($resultado) != 0){
+    echo "Error 2d: Usuario existente";
+    exit();
+}
 
 
-$insert = <<<EOD
+$query = <<<EOD
+SELECT id_user FROM users
+WHERE email='{$email}'
+EOD;
+
+$resultado = mysqli_query($conn, $query);
+
+if (mysqli_num_rows($resultado) != 0){
+    echo "Error 4c: Email existente";
+    exit();
+}
+
+
+
+$password = md5($password);
+
+
+$query = <<<EOD
 INSERT INTO users (`name`, username, email, birthday, `password`)
-VALUES ('$name', '$username', '$email', '$date', '$password');
+VALUES ('{$name}', '{$username}', '{$email}', '{$date}', '{$password}');
 EOD;
 
 // echo $query;
 // Nos connectamos a la base de datos y hacemos la petición
 
 
-$resultado = mysqli_query($conn, $insert);
+$resultado = mysqli_query($conn, $query);
 
 if (!$resultado){
     echo "Error 4: Peticion incorrecta";

@@ -64,7 +64,9 @@ EOD;
 #echo $query;
 #Nos connectamos a la base de datos y hacemos la petición
 
-$conn = mysqli_connect("localhost", "admin", "enti", "entihub");
+require_once("db_conf.php");
+
+$conn = mysqli_connect($db_server, $db_user, $db_pass, $db_db);
 $resultado = mysqli_query($conn, $query);
 
 if (!$resultado){

@@ -1,23 +1,37 @@
 <?php
 
-function open_html ()
+function open_html ($title = "ENTIhub")
 {
-	echo <<<EOD
+$session = false;
+
+if (isset($_SESSION["id_user"])){
+	$session = true;
+}
+
+$loginout = "";
+if ($session){
+	$loginout = "<a href =\"/logout.php\">Logout</a>";
+}else{
+	$loginout = "<a href =\"/login.php\">Login</a>";
+}
+
+echo <<<EOD
 <!doctypr html>
 <html>
 <head>
-	<title>ENTIhub</title>
+	<title>{$title}</title>
 </head>
 
 <body>
 	<header>
-		<h1>ENTIhub</h1>
+		<h1><a href ="/index.php">ENTIhub</a></h1>
 		<nav>
 			<ul>
-				<li>Home</li>
-				<li>Perfil</li>
-				<li>Usuaros</li>
-				<li>Configuración</li>
+				<li><a href ="/index.php">Home</li>
+				<li><a href ="/profile.php">Perfil</li>
+				<li><a href ="/users.php">Usuarios</li>
+				<li><a href ="/dashboard.php">Dashboard</a></li>
+				<li>$loginout</li>
 			</ul>
 		</nav>
 	</header>

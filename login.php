@@ -2,7 +2,7 @@
 
 require_once("template.php");
 
-open_html ();
+open_html ("Login y registro de usuarios");
 
 echo <<<EOD
 <form method="POST" action="login_check.php">
