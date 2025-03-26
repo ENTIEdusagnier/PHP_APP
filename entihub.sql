@@ -14,7 +14,7 @@ CREATE TABLE users (
     id_user INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT, 
     `name` VARCHAR (32) NOT NULL,
     username VARCHAR (16) NOT NULL,
-    email VARCHAR (24) NOT NULL,
+    email VARCHAR (48) NOT NULL,
     birthday DATE NOT NULL,
     `password` CHAR (32) NOT NULL,
     `status` INT NOT NULL DEFAULT 1

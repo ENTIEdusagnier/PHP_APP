@@ -1,14 +1,33 @@
 <?php
 
 function write_message ($message_info){
+	
+	$id_user = 0;
+
+	if (isset($_SESSION["id_user"])){
+		$id_user = intval($_SESSION["id_user"]);
+	}
+
+	$delete_link = "";
+
+	if ($id_user == $message_info["id_user"]){
+		$delete_link = <<<EOD
+		<p class ="delete-message"><a href="delete_message.php?message={$message_info["id_message"]}">Delete</a><p> 
+		EOD;
+	}
+
+
 	echo <<<EOD
 	<section class="message">
 	<h3><a href="profile.php?user={$message_info["username"]}">{$message_info["name"]}</a></h3>
 	<p class="message-text">{$message_info["message"]}</p>
 	<p class="message-date">{$message_info["post_time"]}</p>
+	<p class ="delete-message"><a href="delete_message.php?message={$message_info["id_message"]}">Delete</a><p>
+	{$delete_link}
 	</section>
 	EOD;
 }
+
 
 session_start();
 require_once("template.php");
@@ -49,11 +68,13 @@ require_once("db_conf.php");
 $conn = mysqli_connect($db_server, $db_user, $db_pass, $db_db);
 
 $query = <<<EOD
-SELECT 
+SELECT
+	users.id_user
 	users.username, 
 	users.name,
 	messages.message,
-	messages.post_time
+	messages.post_time,
+	messages.id_message
 FROM 
 	users
 INNER JOIN 
