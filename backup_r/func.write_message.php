@@ -12,7 +12,7 @@ function write_message ($message_info)
 
 	if ($id_user == $message_info["id_user"]){
 		$delete_link = <<<EOD
-<p class="message-delete"><a href="delete_message.php?id_message={$message_info["id_message"]}">Eliminar</a></p>
+<p class="message-delete"><a href="message_delete.php?id_message={$message_info["id_message"]}">Eliminar</a></p>
 EOD;
 	}
 

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 if (!isset($_SESSION["id_user"])){
     header("Location: login.php");
     exit();
@@ -17,7 +17,6 @@ if ($id_message <= 0){
 }
 
 
-$id_user = 0;
 
 if (isset($_SESSION["id_user"])){
 	$id_user = intval($_SESSION["id_user"]);
