@@ -41,11 +41,11 @@ echo <<<EOD
 <section id="user_data">
     <h2>Datos del usuario</h2>
     <ul>
-        <li><strong>Nombre:</strong>{$user["name"]}</li>
-        <li><strong>Usuaro</strong>{$user["username"]}</li>
-        <li><strong>E-mail:</strong>{$user["email"]}</li>
-        <li><strong>Nacimiento:</strong>{$user["birthday"]}</li>
-        <li><strong>Password:</strong>*********</li>
+        <li><strong>Nombre: </strong>{$user["name"]}</li>
+        <li><strong>Usuario: </strong>{$user["username"]}</li>
+        <li><strong>E-mail: </strong>{$user["email"]}</li>
+        <li><strong>Nacimiento: </strong>{$user["birthday"]}</li>
+        <li><strong>Password: </strong>*********</li>
     </ul>
 </section>
 EOD;

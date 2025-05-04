@@ -27,27 +27,6 @@ $conn = mysqli_connect($db_server, $db_user, $db_pass, $db_db);
 
 
 $query = <<<EOD
-SELECT
-	id_message
-FROM
-	messages
-WHERE
-	id_message={$id_message}
-	AND id_user={$id_user}
-EOD;
-
-$result = mysqli_query($conn, $query);
-
-if (!$result) {
-	die("Error 3: Error al hacer la petición");
-}
-
-if (mysqli_num_rows($result) != 1) {
-	die("Error 4: Error al hacer la petición");
-}
-
-
-$query = <<<EOD
 UPDATE
 	messages
 SET
@@ -61,7 +40,7 @@ EOD;
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
-	die("Error 5: Error al hacer la petición");
+	die("Error 3: Error al hacer la petición");
 }
 
 header("Location: dashboard_message.php");

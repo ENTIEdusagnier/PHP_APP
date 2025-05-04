@@ -18,7 +18,15 @@ header h1 {
 	font-size: 32px;
 	margin: 0;
 }
-  
+ 
+header h1 a {
+	display: block;
+	width: 160px;
+	height: 64px;
+	background: url(ENTIhub_logo_small.png) no-repeat center center;
+	background-size: contain;
+	text-indent: -10000px;
+}
 header h1 span:first-child {
 	background-color: #ffffff;
 	color: #000000;
@@ -47,6 +55,7 @@ header nav a {
 	font-weight: bold;
 	transition: color 0.3s;
 }
+
   
 header nav a:hover {
 	color: #ff9900;
@@ -190,8 +199,6 @@ a:hover {
 }
 
 
-
-
 .form-container {
 	display: flex;
 	justify-content: space-between;
@@ -267,5 +274,34 @@ form p input[type="email"]:focus,
 form p input[type="date"]:focus {
 	outline: none;
 	border: 2px solid #ff9900;
+}
+
+.search-form input,
+.search-form button {
+    padding: 6px 12px;
+    font-size: 14px;
+    border: 1px solid #444;
+    height: 38px; /* Fijamos una altura común */
+    box-sizing: border-box; /* Para que padding + border no inflen */
+}
+
+.search-form input {
+    border-radius: 4px 0 0 4px;
+    background-color: #333;
+    color: #fff;
+    width: 240px;
+}
+
+.search-form button {
+    border-radius: 0 4px 4px 0;
+    background-color: #ff9900;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-form button:hover {
+    background-color: #ffa733;
 }
   

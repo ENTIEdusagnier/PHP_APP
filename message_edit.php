@@ -14,7 +14,7 @@ if (!isset($_GET["id_message"])){
 	exit();
 }
 
-/* TODO: FILTRAR MF */
+
 
 $id_message = intval($_GET["id_message"]);
 if ($id_message <= 0){
