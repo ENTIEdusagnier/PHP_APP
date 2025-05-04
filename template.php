@@ -25,6 +25,7 @@ echo <<<EOD
 <body>
 	<header>
 		<h1><a href ="/index.php">ENTIhub</a></h1>
+		<link rel="stylesheet" type="text/css" href="entihub.css">
 		<nav>
 			<ul>
 				<li><a href ="/index.php">Home</li>

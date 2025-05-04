@@ -28,9 +28,10 @@ $conn = mysqli_connect($db_server, $db_user, $db_pass, $db_db);
 
 $resultado = mysqli_query($conn, $query);
 
-if (!$resultado){
-    echo "Error 1: Peticion incorrecta";
-	exit();
+if (mysqli_num_rows($resultado) == 0){
+    echo "Error 1: Usuario no existe";
+	close_html();
+    exit();
 }
 
 
@@ -56,16 +57,17 @@ WHERE id_user={$session}
 AND post_time=(
     SELECT MAX(post_time) 
     FROM messages
-    WHERE id_user={$seesion}
+    WHERE id_user={$session}
 )
 EOD;
 
 $resultado = mysqli_query($conn, $query);
 
 if (mysqli_num_rows($resultado) == 0){
-    echo <<<EOD
+	echo <<<EOD
 <section id="dashboard_no_last_message">
-    <p><a href="index.php">¡Escribe tu primer mensaje!</p>
+	<h2>¡Empieza hoy en nuestra plataforma!</h2>
+	<p><a href="index.php">¡Escribe tu primer mensaje!</a></p>
 </section>
 EOD;
 }

@@ -1,13 +1,19 @@
 <?php
-
-
-require_once("template.php");
 require_once("func.check_session.php");
 
 $session = check_session();
 
+require_once("template.php");
+
 open_html();
 
+if (isset($_COOKIE["logout"]) && $_COOKIE["logout"] != ""){
+	$user_prev = addslashes($_COOKIE["logout"]);
+	setcookie("logout", "");
+	echo <<<EOD
+<p id="logout_msg" class="notice"><strong>Sessión del usuario <em>{$user_prev}</em> cerrada</strong></p>
+EOD;
+}
 if ($session) {
 	echo <<<EOD
 <aside id="message_form">

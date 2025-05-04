@@ -4,9 +4,9 @@ session_start();
 
 session_destroy();
 
-$name = "manolo";
 
-//$_COOKIE["logout"] = $name;
+
+$_COOKIE["logout"] = $name;
 
 setcookie("logout", $name);
 
